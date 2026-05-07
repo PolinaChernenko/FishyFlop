@@ -1,0 +1,59 @@
+{
+  "" : {
+    "diagnostics" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlop-primary.dia",
+    "emit-module-dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlop-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlop-primary-emit-module.dia",
+    "pch" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlop-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlop-primary.swiftdeps"
+  },
+  "/Users/polina/Projects/FishyFlop/FishyFlop/ContentView.swift" : {
+    "const-values" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/polina/Projects/FishyFlop/FishyFlop/FishyFlopApp.swift" : {
+    "const-values" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlopApp.swiftconstvalues",
+    "dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlopApp.d",
+    "diagnostics" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlopApp.dia",
+    "index-unit-output-path" : "/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlopApp.o",
+    "llvm-bc" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlopApp.bc",
+    "object" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlopApp.o",
+    "swift-dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlopApp.swiftdeps",
+    "swiftmodule" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/FishyFlopApp~partial.swiftmodule"
+  },
+  "/Users/polina/Projects/FishyFlop/FishyFlop/GameConfig.swift" : {
+    "const-values" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameConfig.swiftconstvalues",
+    "dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameConfig.d",
+    "diagnostics" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameConfig.dia",
+    "index-unit-output-path" : "/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameConfig.o",
+    "llvm-bc" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameConfig.bc",
+    "object" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameConfig.o",
+    "swift-dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameConfig.swiftdeps",
+    "swiftmodule" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameConfig~partial.swiftmodule"
+  },
+  "/Users/polina/Projects/FishyFlop/FishyFlop/GameScene.swift" : {
+    "const-values" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameScene.swiftconstvalues",
+    "dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameScene.d",
+    "diagnostics" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameScene.dia",
+    "index-unit-output-path" : "/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameScene.o",
+    "llvm-bc" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameScene.bc",
+    "object" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameScene.o",
+    "swift-dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameScene.swiftdeps",
+    "swiftmodule" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GameScene~partial.swiftmodule"
+  },
+  "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/polina/Projects/FishyFlop/build/FishyFlop.build/Debug-iphonesimulator/FishyFlop.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}
