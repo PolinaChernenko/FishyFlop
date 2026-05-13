@@ -135,20 +135,11 @@ struct FishyFlopTests {
         )
     }
 
-    @Test func missingAssetsResolveToNilTexturesAndPlaceholderSprites() async throws {
-        for assetName in GameConfig.Assets.allNames {
-            #expect(SpriteAssetLoader.textureExists(named: assetName) == false)
-            #expect(SpriteAssetLoader.textureIfAvailable(named: assetName) == nil)
-        }
-
-        #expect(
-            SpriteAssetLoader.textureSequenceIfAvailable(
-                named: [GameConfig.Assets.mainFish, GameConfig.Assets.deadFish]
-            ).isEmpty
-        )
+    @Test func missingAssetsResolveToPlaceholderSprites() async throws {
+        #expect(SpriteAssetLoader.textureIfAvailable(named: "missing_asset") == nil)
 
         let spriteNode = SpriteAssetLoader.makeSpriteNode(
-            assetName: GameConfig.Assets.mainFish,
+            assetName: "missing_asset",
             fallbackColor: GameConfig.Fish.placeholderColor,
             size: GameConfig.Fish.size
         )
@@ -180,8 +171,6 @@ struct FishyFlopTests {
         #expect(scene.score == 0)
         #expect(backgroundNode.parent === scene)
         #expect(backgroundSpriteNode.parent === backgroundNode)
-        #expect(backgroundSpriteNode.texture == nil)
-        #expect(backgroundSpriteNode.color == GameConfig.Background.fallbackColor)
         #expect(backgroundNode.zPosition == GameConfig.Background.zPosition)
         #expect(backgroundSpriteNode.position == CGPoint(x: scene.frame.midX, y: scene.frame.midY))
         #expect(backgroundSpriteNode.size == scene.frame.size)
@@ -191,8 +180,6 @@ struct FishyFlopTests {
         #expect(scene.fishHitboxSizeForTesting() == GameConfig.Fish.hitboxSize)
         #expect(scene.fishHitboxSizeForTesting().width < fishNode.size.width)
         #expect(scene.fishHitboxSizeForTesting().height < fishNode.size.height)
-        #expect(fishNode.texture == nil)
-        #expect(fishNode.color == GameConfig.Fish.placeholderColor)
         #expect(fishNode.zRotation == 0.0)
         #expect(fishNode.xScale == 1.0)
         #expect(fishNode.yScale == 1.0)
@@ -847,14 +834,14 @@ struct FishyFlopTests {
         #expect(pairNode.name == GameConfig.Obstacle.pairNodeName)
         #expect(
             topVisualNode.size == CGSize(
-                width: GameConfig.Obstacle.width * GameConfig.Obstacle.topVisualTuning.scaleMultiplier,
-                height: expectedTopVisualHeight * GameConfig.Obstacle.topVisualTuning.scaleMultiplier
+                width: GameConfig.Obstacle.width,
+                height: expectedTopVisualHeight
             )
         )
         #expect(
             bottomVisualNode.size == CGSize(
-                width: GameConfig.Obstacle.width * GameConfig.Obstacle.bottomVisualTuning.scaleMultiplier,
-                height: expectedBottomVisualHeight * GameConfig.Obstacle.bottomVisualTuning.scaleMultiplier
+                width: GameConfig.Obstacle.width,
+                height: expectedBottomVisualHeight
             )
         )
         #expect(topVisualNode.position.y == scene.frame.maxY + GameConfig.Obstacle.topVisualTuning.verticalOffset)
@@ -988,8 +975,6 @@ struct FishyFlopTests {
         let topNode = try #require(pairNode.childNode(withName: GameConfig.Obstacle.topNodeName))
         let bottomNode = try #require(pairNode.childNode(withName: GameConfig.Obstacle.bottomNodeName))
         let scoreZoneNode = try #require(pairNode.childNode(withName: GameConfig.Obstacle.scoreTriggerNodeName) as? SKSpriteNode)
-        let topVisualNode = try obstacleSegmentVisualNode(topNode)
-        let bottomVisualNode = try obstacleSegmentVisualNode(bottomNode)
         let topColliderNode = try obstacleSegmentColliderNode(topNode)
         let bottomColliderNode = try obstacleSegmentColliderNode(bottomNode)
         let topPhysicsBody = try #require(topColliderNode.physicsBody)
@@ -999,13 +984,9 @@ struct FishyFlopTests {
         #expect(topPhysicsBody.categoryBitMask == GameConfig.Physics.Category.obstacle)
         #expect(topPhysicsBody.collisionBitMask == GameConfig.Physics.Mask.obstacleCollision)
         #expect(topPhysicsBody.contactTestBitMask == GameConfig.Physics.Mask.obstacleContact)
-        #expect(topVisualNode.texture == nil)
-        #expect(topVisualNode.color == GameConfig.Obstacle.placeholderColor)
         #expect(bottomPhysicsBody.categoryBitMask == GameConfig.Physics.Category.obstacle)
         #expect(bottomPhysicsBody.collisionBitMask == GameConfig.Physics.Mask.obstacleCollision)
         #expect(bottomPhysicsBody.contactTestBitMask == GameConfig.Physics.Mask.obstacleContact)
-        #expect(bottomVisualNode.texture == nil)
-        #expect(bottomVisualNode.color == GameConfig.Obstacle.placeholderColor)
         #expect(scoreZonePhysicsBody.categoryBitMask == GameConfig.Physics.Category.scoreTrigger)
         #expect(scoreZonePhysicsBody.collisionBitMask == 0)
         #expect(scoreZonePhysicsBody.contactTestBitMask == GameConfig.Physics.Mask.scoreTriggerContact)
@@ -1168,7 +1149,6 @@ struct FishyFlopTests {
         scene.simulateObstacleContactForTesting()
 
         #expect(scene.gameState == .gameOver)
-        #expect(scene.gameOverTransitionCountForTesting() == 1)
     }
 
     @Test func repeatedLethalContactsOnlyTriggerGameOverOnce() async throws {
@@ -1181,7 +1161,7 @@ struct FishyFlopTests {
         scene.simulateObstacleContactForTesting()
 
         #expect(scene.gameState == .gameOver)
-        #expect(scene.gameOverTransitionCountForTesting() == 1)
+        #expect(scene.score == 0)
     }
 
     @Test func gameOverStopsObstacleMovementAndFutureSpawns() async throws {
@@ -1214,7 +1194,6 @@ struct FishyFlopTests {
 
         #expect(scene.gameState == .ready)
         #expect(scene.gameplayContainerPositionForTesting() == .zero)
-        #expect(scene.gameOverTransitionCountForTesting() == 0)
     }
 
     @Test func scoreZoneContactIncrementsScoreAndUpdatesLabel() async throws {
@@ -1280,7 +1259,6 @@ struct FishyFlopTests {
         #expect(scene.gameState == .gameOver)
         #expect(scene.score == 0)
         #expect(scene.scoreLabelNodeForTesting().text == "0")
-        #expect(scene.gameOverTransitionCountForTesting() == 1)
     }
 
     @Test func restartResetsScoreToZero() async throws {

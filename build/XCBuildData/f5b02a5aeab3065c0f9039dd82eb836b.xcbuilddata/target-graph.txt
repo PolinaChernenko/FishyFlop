@@ -1,4 +1,0 @@
-Target dependency graph (2 targets)
-Target 'FishyFlopTests' in project 'FishyFlop'
-➜ Explicit dependency on target 'FishyFlop' in project 'FishyFlop'
-Target 'FishyFlop' in project 'FishyFlop' (no dependencies)
