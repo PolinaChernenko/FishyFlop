@@ -49,7 +49,7 @@ final class ObstacleManager {
             obstaclePair.position.x -= distance
         }
 
-        removeOffscreenObstacles(playableRect: playableRect)
+        removeOffscreenObstacles(sceneFrame: sceneFrame)
     }
 
     func spawnPair(
@@ -317,10 +317,9 @@ final class ObstacleManager {
         return node
     }
 
-    private func removeOffscreenObstacles(playableRect: CGRect) {
+    private func removeOffscreenObstacles(sceneFrame: CGRect) {
         for obstaclePair in obstacleLayer.children {
-            let rightEdge = obstaclePair.position.x + (GameConfig.Obstacle.width / 2.0)
-            if rightEdge < playableRect.minX {
+            if obstaclePair.calculateAccumulatedFrame().maxX < sceneFrame.minX {
                 obstaclePair.removeFromParent()
             }
         }

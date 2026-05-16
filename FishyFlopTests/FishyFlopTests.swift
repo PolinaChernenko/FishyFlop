@@ -1091,7 +1091,36 @@ struct FishyFlopTests {
         scene.spawnObstaclePairForTesting(gapCenterY: scene.obstacleGapCenterYRangeForTesting().lowerBound)
 
         let pairNode = try #require(scene.obstaclePairNodesForTesting().first)
-        pairNode.position.x = -GameConfig.Obstacle.width
+        pairNode.position.x = scene.frame.minX - pairNode.calculateAccumulatedFrame().width
+
+        scene.update(1.0 / 60.0)
+
+        #expect(scene.obstaclePairNodesForTesting().isEmpty)
+    }
+
+    @Test func obstaclesRemainVisibleUntilTheirRenderedBoundsExitScreen() async throws {
+        let scene = makeScene()
+        attachScene(scene)
+        scene.handleTap()
+        scene.spawnObstaclePairForTesting(gapCenterY: scene.obstacleGapCenterYRangeForTesting().lowerBound)
+
+        let pairNode = try #require(scene.obstaclePairNodesForTesting().first)
+        let pairFrame = pairNode.calculateAccumulatedFrame()
+
+        let fixedWidthRemovalX = scene.frame.minX - (GameConfig.Obstacle.width / 2.0) - 1.0
+        let stillVisibleX = scene.frame.minX - pairFrame.maxX + 1.0
+
+        #expect(fixedWidthRemovalX < stillVisibleX)
+
+        pairNode.position.x = fixedWidthRemovalX
+        #expect(pairNode.calculateAccumulatedFrame().maxX > scene.frame.minX)
+
+        scene.update(1.0 / 60.0)
+
+        #expect(scene.obstaclePairNodesForTesting().count == 1)
+
+        pairNode.position.x = scene.frame.minX - pairNode.calculateAccumulatedFrame().maxX - 1.0
+        #expect(pairNode.calculateAccumulatedFrame().maxX < scene.frame.minX)
 
         scene.update(1.0 / 60.0)
 
