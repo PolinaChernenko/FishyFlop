@@ -22,6 +22,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     let obstacleManager = ObstacleManager()
     let hudManager = HUDManager()
     let scoreManager = ScoreManager()
+    let hapticManager = HapticManager()
 
     let backgroundNode = SKNode()
     let backgroundSpriteNode: SKSpriteNode
@@ -285,8 +286,10 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         case .ready:
             startPlaying()
             playerController.flap(impulse: effectiveFlapImpulseVector())
+            hapticManager.playFlapTap()
         case .playing:
             playerController.flap(impulse: effectiveFlapImpulseVector())
+            hapticManager.playFlapTap()
         case .gameOver:
             resetRound()
         }
@@ -308,6 +311,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         lastUpdateTime = nil
+        hapticManager.playDeathRumble()
         playerController.freezeForGameOver()
         runCollisionShake()
         updateHUDForCurrentState()
@@ -319,6 +323,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func resetRound() {
+        hapticManager.cancelPendingDeathRumble()
         stateManager.resetToReady()
         scoreManager.reset()
         lastUpdateTime = nil
