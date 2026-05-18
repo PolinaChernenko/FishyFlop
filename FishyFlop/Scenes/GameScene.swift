@@ -27,6 +27,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     let backgroundNode = SKNode()
     let backgroundSpriteNode: SKSpriteNode
     let gameplayNode = SKNode()
+    let effectsNode = SKNode()
     let floorNode = SKNode()
     let ceilingNode = SKNode()
 
@@ -159,6 +160,9 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         attachNodeIfNeeded(backgroundNode, to: self)
         attachNodeIfNeeded(backgroundSpriteNode, to: backgroundNode)
         attachNodeIfNeeded(gameplayNode, to: self)
+        effectsNode.name = GameConfig.Effects.nodeName
+        effectsNode.zPosition = GameConfig.Effects.zPosition
+        attachNodeIfNeeded(effectsNode, to: gameplayNode)
         playerController.attachIfNeeded(to: gameplayNode)
         obstacleManager.attachIfNeeded(to: gameplayNode)
         hudManager.attachIfNeeded(to: self)
@@ -311,8 +315,11 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         lastUpdateTime = nil
+        let deathPosition = playerController.fishNode.position
+        let deathVelocity = playerController.fishNode.physicsBody?.velocity
         hapticManager.playDeathRumble()
         playerController.freezeForGameOver()
+        effectsNode.addChild(DeathEffectFactory.makeDeathBurst(at: deathPosition, initialVelocity: deathVelocity))
         runCollisionShake()
         updateHUDForCurrentState()
         layoutDeadFish()
@@ -329,6 +336,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         lastUpdateTime = nil
         gameplayNode.removeAllActions()
         gameplayNode.position = .zero
+        effectsNode.removeAllChildren()
         obstacleManager.reset()
         playerController.resetForReadyState(startPosition: currentStartPosition())
         hudManager.updateScore(scoreManager.score)

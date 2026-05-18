@@ -197,6 +197,79 @@ enum GameConfig {
         static let tapScaleDuration: TimeInterval = 0.12
         static let collisionShakeOffset: CGFloat = 8.0
         static let collisionShakeStepDuration: TimeInterval = 0.04
+        static let nodeName = "effects"
+        static let zPosition: CGFloat = 2.0
+
+        enum DeathBurst {
+            static let containerNodeName = "deathBurst"
+            static let coreNodeName = "deathBurstCore"
+            static let primaryEmitterNodeName = "deathBurstPrimaryEmitter"
+            static let dustEmitterNodeName = "deathBurstDustEmitter"
+            static let highlightEmitterNodeName = "deathBurstHighlightEmitter"
+            static let cleanupDelay: TimeInterval = 1.0
+            static let motionBiasFallback = CGVector(dx: -20.0, dy: 18.0)
+            static let motionBiasStrength: CGFloat = 24.0
+
+            enum Core {
+                static let initialScale: CGFloat = 0.2
+                static let expandedScale: CGFloat = 1.18
+                static let flashOutScale: CGFloat = 1.52
+                static let fadeInDuration: TimeInterval = 0.04
+                static let expandDuration: TimeInterval = 0.16
+                static let fadeOutDuration: TimeInterval = 0.24
+                static let maxAlpha: CGFloat = 0.96
+            }
+
+            enum Primary {
+                static let particleCount = 54
+                static let emissionDuration: TimeInterval = 0.08
+                static let particleLifetime: TimeInterval = 0.3
+                static let particleLifetimeRange: TimeInterval = 0.1
+                static let emissionRadius: CGFloat = 16.0
+                static let particleSpeed: CGFloat = 148.0
+                static let particleSpeedRange: CGFloat = 62.0
+                static let radialAcceleration: CGFloat = -54.0
+                static let alpha: CGFloat = 0.98
+                static let alphaRange: CGFloat = 0.08
+                static let alphaSpeed: CGFloat = -3.2
+                static let scale: CGFloat = 0.32
+                static let scaleRange: CGFloat = 0.2
+                static let scaleSpeed: CGFloat = -0.32
+            }
+
+            enum Dust {
+                static let particleCount = 16
+                static let emissionDuration: TimeInterval = 0.2
+                static let particleLifetime: TimeInterval = 0.5
+                static let particleLifetimeRange: TimeInterval = 0.08
+                static let emissionRadius: CGFloat = 16.0
+                static let particleSpeed: CGFloat = 46.0
+                static let particleSpeedRange: CGFloat = 12.0
+                static let upwardDrift: CGFloat = 18.0
+                static let alpha: CGFloat = 0.88
+                static let alphaRange: CGFloat = 0.04
+                static let alphaSpeed: CGFloat = -1.1
+                static let scale: CGFloat = 0.26
+                static let scaleRange: CGFloat = 0.04
+                static let scaleSpeed: CGFloat = 0.0
+            }
+
+            enum Highlights {
+                static let particleCount = 10
+                static let emissionDuration: TimeInterval = 0.1
+                static let particleLifetime: TimeInterval = 0.22
+                static let particleLifetimeRange: TimeInterval = 0.08
+                static let emissionRadius: CGFloat = 8.0
+                static let particleSpeed: CGFloat = 166.0
+                static let particleSpeedRange: CGFloat = 48.0
+                static let alpha: CGFloat = 0.9
+                static let alphaRange: CGFloat = 0.08
+                static let alphaSpeed: CGFloat = -3.8
+                static let scale: CGFloat = 0.12
+                static let scaleRange: CGFloat = 0.06
+                static let scaleSpeed: CGFloat = -0.14
+            }
+        }
     }
 
     enum Debug {

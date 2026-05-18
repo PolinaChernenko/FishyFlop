@@ -50,6 +50,14 @@ extension GameScene {
         gameplayNode
     }
 
+    func effectsNodeForTesting() -> SKNode {
+        effectsNode
+    }
+
+    func deathBurstNodesForTesting() -> [SKNode] {
+        effectsNode.children.filter { $0.name == GameConfig.Effects.DeathBurst.containerNodeName }
+    }
+
     func backgroundNodeForTesting() -> SKNode {
         backgroundNode
     }

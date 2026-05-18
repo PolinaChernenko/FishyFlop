@@ -158,6 +158,7 @@ struct FishyFlopTests {
         let fishNode = try #require(scene.childNode(withName: GameConfig.Fish.nodeName) as? SKSpriteNode)
         let floorNode = try #require(scene.childNode(withName: GameConfig.World.floorNodeName))
         let ceilingNode = try #require(scene.childNode(withName: GameConfig.World.ceilingNodeName))
+        let effectsNode = scene.effectsNodeForTesting()
         let scoreLabelNode = scene.scoreLabelNodeForTesting()
         let readyLabelNode = scene.readyLabelNodeForTesting()
         let gameOverTitleLabelNode = scene.gameOverTitleLabelNodeForTesting()
@@ -171,10 +172,15 @@ struct FishyFlopTests {
         #expect(scene.score == 0)
         #expect(backgroundNode.parent === scene)
         #expect(backgroundSpriteNode.parent === backgroundNode)
+        #expect(effectsNode.parent === scene.gameplayNodeForTesting())
+        #expect(effectsNode.name == GameConfig.Effects.nodeName)
+        #expect(effectsNode.zPosition == GameConfig.Effects.zPosition)
         #expect(backgroundNode.zPosition == GameConfig.Background.zPosition)
         #expect(backgroundSpriteNode.position == CGPoint(x: scene.frame.midX, y: scene.frame.midY))
         #expect(backgroundSpriteNode.size == scene.frame.size)
         #expect(backgroundNode.zPosition < GameConfig.Obstacle.zPosition)
+        #expect(effectsNode.zPosition > GameConfig.Fish.zPosition)
+        #expect(effectsNode.zPosition < GameConfig.HUD.Overlay.zPosition)
         #expect(fishNode.position == scene.currentStartPosition())
         #expect(fishNode.size == GameConfig.Fish.size)
         #expect(scene.fishHitboxSizeForTesting() == GameConfig.Fish.hitboxSize)
@@ -616,17 +622,37 @@ struct FishyFlopTests {
         let gameOverSubtitleLabelNode = scene.gameOverSubtitleLabelNodeForTesting()
         let scoreLabelNode = scene.scoreLabelNodeForTesting()
         fishNode.position.y += 12.0
+        let impactPosition = fishNode.position
 
         scene.simulateFloorContactForTesting()
 
+        let deathBurstNode = try #require(scene.deathBurstNodesForTesting().first)
         #expect(scene.gameState == .gameOver)
         #expect(physicsBody.isDynamic == false)
         #expect(physicsBody.velocity == .zero)
+        #expect(deathBurstNode.parent === scene.effectsNodeForTesting())
+        #expect(deathBurstNode.position == impactPosition)
         #expect(fishNode.position == expectedDeadFishPosition(for: scene))
         #expect(readyLabelNode.isHidden == true)
         #expect(gameOverTitleLabelNode.isHidden == false)
         #expect(gameOverSubtitleLabelNode.isHidden == false)
         #expect(scoreLabelNode.isHidden == false)
+    }
+
+    @Test func gameOverDeathBurstUsesConfiguredBubbleCount() async throws {
+        let scene = makeScene()
+        attachScene(scene)
+        scene.handleTap()
+
+        scene.triggerGameOverForTesting()
+
+        let deathBurstNode = try #require(scene.deathBurstNodesForTesting().first)
+        let dustEmitter = try #require(
+            deathBurstNode.childNode(withName: GameConfig.Effects.DeathBurst.dustEmitterNodeName) as? SKEmitterNode
+        )
+
+        #expect(dustEmitter.numParticlesToEmit == GameConfig.Effects.DeathBurst.Dust.particleCount)
+        #expect(dustEmitter.numParticlesToEmit == 16)
     }
 
     @Test func ceilingContactDoesNotTriggerGameOver() async throws {
@@ -662,9 +688,11 @@ struct FishyFlopTests {
         fishNode.setScale(1.0 + GameConfig.Effects.tapScaleAmount)
 
         scene.triggerGameOverForTesting()
+        #expect(scene.deathBurstNodesForTesting().count == 1)
         scene.handleTap()
 
         #expect(scene.gameState == .ready)
+        #expect(scene.deathBurstNodesForTesting().isEmpty)
         #expect(scene.fishVisualStateForTesting() == .stopped)
         #expect(fishNode.position == scene.currentStartPosition())
         #expect(fishNode.zRotation == 0.0)
@@ -1191,6 +1219,7 @@ struct FishyFlopTests {
 
         #expect(scene.gameState == .gameOver)
         #expect(scene.score == 0)
+        #expect(scene.deathBurstNodesForTesting().count == 1)
     }
 
     @Test func gameOverStopsObstacleMovementAndFutureSpawns() async throws {
